@@ -35,12 +35,12 @@
 
 # **************************************************************************
 
-PKG_VERSION=2.4.1
+PKG_VERSION=2.5.0
 PKG_NAME=expat-${PKG_VERSION}
 PKG_DIR_NAME=expat-${PKG_VERSION}
 PKG_TYPE=.tar.xz
 PKG_URLS=(
-	"http://sourceforge.net/projects/expat/files/expat/${PKG_VERSION}/${PKG_NAME}${PKG_TYPE}"
+	"https://sourceforge.net/projects/expat/files/expat/${PKG_VERSION}/${PKG_NAME}${PKG_TYPE}"
 )
 
 PKG_PRIORITY=extra
@@ -48,7 +48,6 @@ PKG_PRIORITY=extra
 #
 
 PKG_PATCHES=(
-	expat/expat_mingw_tests_fix.patch
 )
 
 #
