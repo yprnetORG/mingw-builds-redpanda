@@ -82,12 +82,10 @@ function func_get_subtargets {
 		termcap
 		libffi
 		expat
-		ncurses
 		readline
 		gdbm
 		tcl
 		tk
-		openssl
 		$([[ $python_version == 3 ]] && echo xz-utils)
 		sqlite
 		python-$python_version
