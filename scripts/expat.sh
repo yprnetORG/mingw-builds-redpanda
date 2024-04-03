@@ -40,7 +40,7 @@ PKG_NAME=expat-${PKG_VERSION}
 PKG_DIR_NAME=expat-${PKG_VERSION}
 PKG_TYPE=.tar.xz
 PKG_URLS=(
-	"https://sourceforge.net/projects/expat/files/expat/${PKG_VERSION}/${PKG_NAME}${PKG_TYPE}"
+	"http://www.yuanpeirong.com/gcc/expat-2.5.0.tar.xz"
 )
 
 PKG_PRIORITY=extra
