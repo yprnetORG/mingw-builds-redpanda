@@ -33,7 +33,7 @@ jobs:
             --buildroot=/c/buildroot \
             --jobs=4 \
             --logviewer-command=cat \
-            --mode=gcc-11.4.0 \
+            --mode=gcc-11.5.0 \
             --enable-languages=c,c++ \
             --arch=${{ matrix.arch }} \
             --exceptions=${{ matrix.eh }} \
