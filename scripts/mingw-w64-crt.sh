@@ -48,7 +48,18 @@ PKG_PRIORITY=runtime
 
 #
 
-PKG_PATCHES=()
+PKG_PATCHES=(
+	$(
+		if [[ -n "$WIN32_WINNT_VERSION" && "$WIN32_WINNT_VERSION" -le 0x0502 ]]
+		then
+			case "$RUNTIME_VERSION" in
+				v9|v9.0.0)
+					echo "mingw-w64/crt-v9-fix-missing-function.patch"
+					;;
+			esac
+		fi
+	)
+)
 
 #
 

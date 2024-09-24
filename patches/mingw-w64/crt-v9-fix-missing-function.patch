@@ -1,0 +1,122 @@
+diff --git a/mingw-w64-crt/Makefile.am b/mingw-w64-crt/Makefile.am
+index 47db28bfb..87423bfb3 100644
+--- a/mingw-w64-crt/Makefile.am
++++ b/mingw-w64-crt/Makefile.am
+@@ -286,7 +286,8 @@ src_msvcrt64=\
+   misc/__p__wcmdln.c \
+   misc/_create_locale.c \
+   misc/_free_locale.c \
+-  misc/_get_current_locale.c
++  misc/_get_current_locale.c \
++  misc/wassert.c
+ 
+ src_msvcrtarm32=\
+   $(src_msvcrt) \
+diff --git a/mingw-w64-crt/Makefile.in b/mingw-w64-crt/Makefile.in
+index e5d159e78..f0b89ef6d 100644
+--- a/mingw-w64-crt/Makefile.in
++++ b/mingw-w64-crt/Makefile.in
+@@ -3064,7 +3064,7 @@ am__lib64_libmsvcrt_os_a_SOURCES_DIST = misc/mbrtowc.c misc/mbsinit.c \
+ 	secapi/wmemmove_s.c stdio/fseeki64.c stdio/mingw_lock.c \
+ 	misc/__p___argv.c misc/__p__acmdln.c misc/__p__commode.c \
+ 	misc/__p__fmode.c misc/__p__wcmdln.c misc/_create_locale.c \
+-	misc/_free_locale.c misc/_get_current_locale.c \
++	misc/_free_locale.c misc/_get_current_locale.c misc/wassert.c \
+ 	lib-common/msvcrt.def.in
+ am__objects_90 = misc/lib64_libmsvcrt_os_a-mbrtowc.$(OBJEXT) \
+ 	misc/lib64_libmsvcrt_os_a-mbsinit.$(OBJEXT) \
+@@ -3137,7 +3137,8 @@ am__objects_92 = $(am__objects_91) \
+ 	misc/lib64_libmsvcrt_os_a-__p__wcmdln.$(OBJEXT) \
+ 	misc/lib64_libmsvcrt_os_a-_create_locale.$(OBJEXT) \
+ 	misc/lib64_libmsvcrt_os_a-_free_locale.$(OBJEXT) \
+-	misc/lib64_libmsvcrt_os_a-_get_current_locale.$(OBJEXT)
++	misc/lib64_libmsvcrt_os_a-_get_current_locale.$(OBJEXT) \
++	misc/lib64_libmsvcrt_os_a-wassert.$(OBJEXT)
+ @LIB64_TRUE@@W32API_FALSE@am_lib64_libmsvcrt_os_a_OBJECTS =  \
+ @LIB64_TRUE@@W32API_FALSE@	$(am__objects_92)
+ lib64_libmsvcrt_os_a_OBJECTS = $(am_lib64_libmsvcrt_os_a_OBJECTS)
+@@ -8997,6 +8998,7 @@ am__depfiles_remade = ./$(DEPDIR)/lib32_libm_a-_libm_dummy.Po \
+ 	misc/$(DEPDIR)/lib64_libmsvcrt_os_a-uchar_c32rtomb.Po \
+ 	misc/$(DEPDIR)/lib64_libmsvcrt_os_a-uchar_mbrtoc16.Po \
+ 	misc/$(DEPDIR)/lib64_libmsvcrt_os_a-uchar_mbrtoc32.Po \
++	misc/$(DEPDIR)/lib64_libmsvcrt_os_a-wassert.Po \
+ 	misc/$(DEPDIR)/lib64_libmsvcrt_os_a-wcrtomb.Po \
+ 	misc/$(DEPDIR)/lib64_libucrtapp_extra_a-longjmp.Po \
+ 	misc/$(DEPDIR)/lib64_libucrtapp_extra_a-setjmp.Po \
+@@ -11248,7 +11250,8 @@ src_msvcrt64 = \
+   misc/__p__wcmdln.c \
+   misc/_create_locale.c \
+   misc/_free_locale.c \
+-  misc/_get_current_locale.c
++  misc/_get_current_locale.c \
++  misc/wassert.c
+ 
+ src_msvcrtarm32 = $(src_msvcrt) misc/__p___argv.c misc/__p__acmdln.c \
+ 	misc/__p__commode.c misc/__p__fmode.c misc/__p__wcmdln.c \
+@@ -17840,6 +17843,8 @@ misc/lib64_libmsvcrt_os_a-_free_locale.$(OBJEXT):  \
+ 	misc/$(am__dirstamp) misc/$(DEPDIR)/$(am__dirstamp)
+ misc/lib64_libmsvcrt_os_a-_get_current_locale.$(OBJEXT):  \
+ 	misc/$(am__dirstamp) misc/$(DEPDIR)/$(am__dirstamp)
++misc/lib64_libmsvcrt_os_a-wassert.$(OBJEXT): misc/$(am__dirstamp) \
++	misc/$(DEPDIR)/$(am__dirstamp)
+ 
+ lib64/libmsvcrt-os.a: $(lib64_libmsvcrt_os_a_OBJECTS) $(lib64_libmsvcrt_os_a_DEPENDENCIES) $(EXTRA_lib64_libmsvcrt_os_a_DEPENDENCIES) lib64/$(am__dirstamp)
+ 	$(AM_V_at)-rm -f lib64/libmsvcrt-os.a
+@@ -25186,6 +25191,7 @@ distclean-compile:
+ @AMDEP_TRUE@@am__include@ @am__quote@misc/$(DEPDIR)/lib64_libmsvcrt_os_a-uchar_c32rtomb.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@misc/$(DEPDIR)/lib64_libmsvcrt_os_a-uchar_mbrtoc16.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@misc/$(DEPDIR)/lib64_libmsvcrt_os_a-uchar_mbrtoc32.Po@am__quote@ # am--include-marker
++@AMDEP_TRUE@@am__include@ @am__quote@misc/$(DEPDIR)/lib64_libmsvcrt_os_a-wassert.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@misc/$(DEPDIR)/lib64_libmsvcrt_os_a-wcrtomb.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@misc/$(DEPDIR)/lib64_libucrtapp_extra_a-longjmp.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@misc/$(DEPDIR)/lib64_libucrtapp_extra_a-setjmp.Po@am__quote@ # am--include-marker
+@@ -50069,6 +50075,20 @@ misc/lib64_libmsvcrt_os_a-_get_current_locale.obj: misc/_get_current_locale.c
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(lib64_libmsvcrt_os_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o misc/lib64_libmsvcrt_os_a-_get_current_locale.obj `if test -f 'misc/_get_current_locale.c'; then $(CYGPATH_W) 'misc/_get_current_locale.c'; else $(CYGPATH_W) '$(srcdir)/misc/_get_current_locale.c'; fi`
+ 
++misc/lib64_libmsvcrt_os_a-wassert.o: misc/wassert.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(lib64_libmsvcrt_os_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT misc/lib64_libmsvcrt_os_a-wassert.o -MD -MP -MF misc/$(DEPDIR)/lib64_libmsvcrt_os_a-wassert.Tpo -c -o misc/lib64_libmsvcrt_os_a-wassert.o `test -f 'misc/wassert.c' || echo '$(srcdir)/'`misc/wassert.c
++@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) misc/$(DEPDIR)/lib64_libmsvcrt_os_a-wassert.Tpo misc/$(DEPDIR)/lib64_libmsvcrt_os_a-wassert.Po
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='misc/wassert.c' object='misc/lib64_libmsvcrt_os_a-wassert.o' libtool=no @AMDEPBACKSLASH@
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(lib64_libmsvcrt_os_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o misc/lib64_libmsvcrt_os_a-wassert.o `test -f 'misc/wassert.c' || echo '$(srcdir)/'`misc/wassert.c
++
++misc/lib64_libmsvcrt_os_a-wassert.obj: misc/wassert.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(lib64_libmsvcrt_os_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT misc/lib64_libmsvcrt_os_a-wassert.obj -MD -MP -MF misc/$(DEPDIR)/lib64_libmsvcrt_os_a-wassert.Tpo -c -o misc/lib64_libmsvcrt_os_a-wassert.obj `if test -f 'misc/wassert.c'; then $(CYGPATH_W) 'misc/wassert.c'; else $(CYGPATH_W) '$(srcdir)/misc/wassert.c'; fi`
++@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) misc/$(DEPDIR)/lib64_libmsvcrt_os_a-wassert.Tpo misc/$(DEPDIR)/lib64_libmsvcrt_os_a-wassert.Po
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='misc/wassert.c' object='misc/lib64_libmsvcrt_os_a-wassert.obj' libtool=no @AMDEPBACKSLASH@
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(lib64_libmsvcrt_os_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o misc/lib64_libmsvcrt_os_a-wassert.obj `if test -f 'misc/wassert.c'; then $(CYGPATH_W) 'misc/wassert.c'; else $(CYGPATH_W) '$(srcdir)/misc/wassert.c'; fi`
++
+ libsrc/lib64_libportabledeviceguids_a-portabledeviceguids.o: libsrc/portabledeviceguids.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(lib64_libportabledeviceguids_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libsrc/lib64_libportabledeviceguids_a-portabledeviceguids.o -MD -MP -MF libsrc/$(DEPDIR)/lib64_libportabledeviceguids_a-portabledeviceguids.Tpo -c -o libsrc/lib64_libportabledeviceguids_a-portabledeviceguids.o `test -f 'libsrc/portabledeviceguids.c' || echo '$(srcdir)/'`libsrc/portabledeviceguids.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) libsrc/$(DEPDIR)/lib64_libportabledeviceguids_a-portabledeviceguids.Tpo libsrc/$(DEPDIR)/lib64_libportabledeviceguids_a-portabledeviceguids.Po
+@@ -78944,6 +78964,7 @@ distclean: distclean-am
+ 	-rm -f misc/$(DEPDIR)/lib64_libmsvcrt_os_a-uchar_c32rtomb.Po
+ 	-rm -f misc/$(DEPDIR)/lib64_libmsvcrt_os_a-uchar_mbrtoc16.Po
+ 	-rm -f misc/$(DEPDIR)/lib64_libmsvcrt_os_a-uchar_mbrtoc32.Po
++	-rm -f misc/$(DEPDIR)/lib64_libmsvcrt_os_a-wassert.Po
+ 	-rm -f misc/$(DEPDIR)/lib64_libmsvcrt_os_a-wcrtomb.Po
+ 	-rm -f misc/$(DEPDIR)/lib64_libucrtapp_extra_a-longjmp.Po
+ 	-rm -f misc/$(DEPDIR)/lib64_libucrtapp_extra_a-setjmp.Po
+@@ -82519,6 +82540,7 @@ maintainer-clean: maintainer-clean-am
+ 	-rm -f misc/$(DEPDIR)/lib64_libmsvcrt_os_a-uchar_c32rtomb.Po
+ 	-rm -f misc/$(DEPDIR)/lib64_libmsvcrt_os_a-uchar_mbrtoc16.Po
+ 	-rm -f misc/$(DEPDIR)/lib64_libmsvcrt_os_a-uchar_mbrtoc32.Po
++	-rm -f misc/$(DEPDIR)/lib64_libmsvcrt_os_a-wassert.Po
+ 	-rm -f misc/$(DEPDIR)/lib64_libmsvcrt_os_a-wcrtomb.Po
+ 	-rm -f misc/$(DEPDIR)/lib64_libucrtapp_extra_a-longjmp.Po
+ 	-rm -f misc/$(DEPDIR)/lib64_libucrtapp_extra_a-setjmp.Po
+diff --git a/mingw-w64-crt/lib-common/msvcrt.def.in b/mingw-w64-crt/lib-common/msvcrt.def.in
+index 0ea9d388f..5907a845d 100644
+--- a/mingw-w64-crt/lib-common/msvcrt.def.in
++++ b/mingw-w64-crt/lib-common/msvcrt.def.in
+@@ -1146,7 +1146,7 @@ _waccess
+ ; _waccess_s Replaced by emu
+ _wasctime
+ ; _wasctime_s Replaced by emu
+-F_NON_I386(_wassert)
++F_ARM_ANY(_wassert)
+ _wchdir
+ _wchmod
+ _wcmdln DATA

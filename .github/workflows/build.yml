@@ -11,13 +11,11 @@ jobs:
         arch: [x86_64, i686]
         include:
           - arch: "x86_64"
-            name: "MinGW64"
             eh: "seh"
             win32_winnt: "0x0502"
           - arch: "i686"
-            name: "MinGW32"
             eh: "dwarf"
-            win32_winnt: "0x0501"
+            win32_winnt: "0x0500"
 
     steps:
       - uses: actions/checkout@v4
@@ -47,7 +45,7 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.name }}
+          name: ${{ matrix.arch }}
           path: C:/buildroot/archives/*.7z
 
       - name: Release
