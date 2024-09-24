@@ -1,0 +1,12 @@
+diff --git a/PC/msvcrtmodule.c b/PC/msvcrtmodule.c
+index 44c82e4594f..5f7e31dc846 100644
+--- a/PC/msvcrtmodule.c
++++ b/PC/msvcrtmodule.c
+@@ -21,6 +21,7 @@
+ #include <io.h>
+ #include <conio.h>
+ #include <sys/locking.h>
++#undef _WCONIO_DEFINED
+ 
+ #ifdef _MSC_VER
+ #if _MSC_VER >= 1500 && _MSC_VER < 1600

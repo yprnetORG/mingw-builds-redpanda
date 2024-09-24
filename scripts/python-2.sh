@@ -132,6 +132,12 @@ PKG_PATCHES=(
 	Python2/1040-install-msilib.patch
 	Python2/1050-Fixed-building-under-Windows-10.patch
 	Python2/1900-ctypes-dont-depend-on-internal-libffi.patch
+	$(
+		if [[ -n "$WIN32_WINNT_VERSION" && "$WIN32_WINNT_VERSION" -le 0x0500 ]]
+		then
+			echo "Python2/win2000-no-wconio.patch"
+		fi
+	)
 )
 
 #
