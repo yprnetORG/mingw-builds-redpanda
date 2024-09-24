@@ -1,0 +1,16 @@
+diff --git a/gzguts.h b/gzguts.h
+index 990a4d2..92b10a5 100644
+--- a/gzguts.h
++++ b/gzguts.h
+@@ -43,6 +43,11 @@
+ #  define WIDECHAR
+ #endif
+ 
++#if defined(_WIN32) && !defined(_UCRT)
++#  define snprintf _snprintf
++#  define vsnprintf _vsnprintf
++#endif
++
+ #ifdef WINAPI_FAMILY
+ #  define open _open
+ #  define read _read

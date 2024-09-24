@@ -52,6 +52,12 @@ PKG_PATCHES=(
 	zlib/01-zlib-1.2.11-1-buildsys.mingw.patch
 	zlib/03-dont-put-sodir-into-L.mingw.patch
 	zlib/013-fix-largefile-support.patch
+	$(
+		if [[ -n "$WIN32_WINNT_VERSION" && "$WIN32_WINNT_VERSION" -le 0x0500 ]]
+		then
+			echo "zlib/win2000-no-mingw-stdio.patch"
+		fi
+	)
 )
 
 #
