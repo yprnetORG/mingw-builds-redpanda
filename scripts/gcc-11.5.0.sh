@@ -3,11 +3,11 @@
 # The BSD 3-Clause License. http://www.opensource.org/licenses/BSD-3-Clause
 #
 # This file is part of MinGW-W64(mingw-builds: https://github.com/niXman/mingw-builds) project.
-# Copyright (c) 2011-2021 by niXman (i dotty nixman doggy gmail dotty com)
+# Copyright (c) 2011-2023 by niXman (i dotty nixman doggy gmail dotty com)
 # Copyright (c) 2012-2015 by Alexpux (alexpux doggy gmail dotty com)
 # All rights reserved.
 #
-# Project: MinGW-W64 ( http://sourceforge.net/projects/mingw-w64/ )
+# Project: MinGW-Builds ( https://github.com/niXman/mingw-builds )
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -35,12 +35,12 @@
 
 # **************************************************************************
 
-PKG_VERSION=11
-PKG_NAME=gcc-${PKG_VERSION}-branch
-PKG_DIR_NAME=gcc-${PKG_VERSION}-branch
-PKG_TYPE=git
+PKG_VERSION=11.5.0
+PKG_NAME=gcc-${PKG_VERSION}
+PKG_DIR_NAME=gcc-${PKG_VERSION}
+PKG_TYPE=.tar.xz
 PKG_URLS=(
-	"git://gcc.gnu.org/git/gcc.git|branch:releases/gcc-$PKG_VERSION|repo:$PKG_TYPE|module:$PKG_DIR_NAME"
+	"https://ftpmirror.gnu.org/gnu/gcc/gcc-${PKG_VERSION}/gcc-${PKG_VERSION}${PKG_TYPE}"
 )
 
 PKG_PRIORITY=main
@@ -63,6 +63,7 @@ PKG_PATCHES=(
 	gcc/0020-libgomp-Don-t-hard-code-MS-printf-attributes.patch
 	gcc/gcc-10-libgcc-ldflags.patch
 	gcc/gcc-11-replace-abort-with-fancy_abort.patch
+	gcc/gcc11.4.0-fix-localedir.patch
 )
 
 #
@@ -127,10 +128,10 @@ PKG_CONFIGURE_FLAGS=(
 	--with-pkgversion="\"$BUILD_ARCHITECTURE-$THREADS_MODEL-$EXCEPTIONS_MODEL${REV_STRING}, $MINGW_W64_PKG_STRING\""
 	--with-bugurl=$BUG_URL
 	#
-	CFLAGS="\"$COMMON_CFLAGS\""
-	CXXFLAGS="\"$COMMON_CXXFLAGS\""
-	CPPFLAGS="\"$COMMON_CPPFLAGS\""
-	LDFLAGS="\"$COMMON_LDFLAGS $( [[ $BUILD_ARCHITECTURE == i686 ]] && echo -Wl,--large-address-aware )\""
+	CFLAGS="$COMMON_CFLAGS"
+	CXXFLAGS="$COMMON_CXXFLAGS"
+	CPPFLAGS="$COMMON_CPPFLAGS"
+	LDFLAGS="$COMMON_LDFLAGS $( [[ $BUILD_ARCHITECTURE == i686 ]] && echo -Wl,--large-address-aware )"
 	LD_FOR_TARGET=$PREFIX/bin/ld.exe
 	--with-boot-ldflags="\"$LDFLAGS -Wl,--disable-dynamicbase -static-libstdc++ -static-libgcc\""
 )
