@@ -32,7 +32,7 @@ jobs:
             --jobs=4 \
             --logviewer-command=cat \
             --mode=gcc-11.5.0 \
-            --enable-languages=c,c++ \
+            --enable-languages=c,c++,fortran \
             --arch=${{ matrix.arch }} \
             --exceptions=${{ matrix.eh }} \
             --threads=posix \

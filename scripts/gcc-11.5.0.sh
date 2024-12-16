@@ -63,6 +63,7 @@ PKG_PATCHES=(
 	gcc/0020-libgomp-Don-t-hard-code-MS-printf-attributes.patch
 	gcc/gcc-10-libgcc-ldflags.patch
 	gcc/gcc-11-replace-abort-with-fancy_abort.patch
+	gcc/gcc11.4.0-fix-localedir.patch
 	$( [[ "$WIN32_WINNT_VERSION" -le 0x0500 ]] && { echo "gcc/gcc-11.5.0-disable-aligned-malloc.patch"; } )
 )
 
@@ -112,7 +113,7 @@ PKG_CONFIGURE_FLAGS=(
 	)
 	--disable-rpath
 	--disable-win32-registry
-	--disable-nls
+	--enable-nls
 	--disable-werror
 	--disable-symvers
 	#
